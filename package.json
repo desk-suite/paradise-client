@@ -1,12 +1,16 @@
 {
   "name": "paradise-client",
   "description": "A no official client for Paradise software from Urusys",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "private": true,
   "author": {
     "name": "Diego Rodríguez",
     "email": "diegorrod91@gmail.com",
     "url": "https://desksuite.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/desk-suite/paradise-client.git"
   },
   "build": {
     "appId": "app.desksuite.paradise-client",
@@ -23,6 +27,9 @@
       "perMachine": true
     }
   },
+  "publish": [
+    "github"
+  ],
   "dependencies": {
     "electron-is-dev": "^1.0.1",
     "electron-updater": "^4.1.2",
@@ -37,9 +44,10 @@
     "build": "rescripts build",
     "test": "rescripts test",
     "eject": "react-scripts eject",
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
+    "p": "electron-builder -w -p always",
     "electron-pack": "build"
   },
   "eslintConfig": {
