@@ -1,4 +1,5 @@
 const electron = require('electron');
+const { autoUpdater } = require("electron-updater");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -18,7 +19,10 @@ function createWindow() {
   mainWindow.on('closed', () => mainWindow = null);
 }
 
-app.on('ready', createWindow);
+app.on('ready', ()=>{
+  createWindow();
+  autoUpdater.checkForUpdatesAndNotify()
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -30,4 +34,5 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+  autoUpdater.checkForUpdatesAndNotify()
 });
