@@ -71,7 +71,7 @@ function createDefaultWindow() {
   win.on('closed', () => {
     win = null;
   });
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+  win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   return win;
 }
 
