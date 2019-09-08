@@ -1,7 +1,8 @@
 {
   "name": "paradise-client",
-  "version": "0.0.11",
-  "main": "public/electron.js",
+  "description": "Cliente no oficial de la solucion Paradise de Urusys",
+  "version": "0.0.19",
+  "private": true,
   "author": {
     "name": "Diego Rodriguez",
     "email": "diegorrod91@gmail.com"
@@ -10,38 +11,13 @@
     "type": "git",
     "url": "https://github.com/desk-suite/paradise-client.git"
   },
-  "scripts": {
-    "start": "rescripts start",
-    "build": "rescripts build",
-    "test": "rescripts test",
-    "eject": "react-scripts eject",
-    "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "postinstall": "electron-builder install-app-deps",
-    "preelectron-pack": "yarn build",
-    "electron-pack": "electron-builder -w"
-  },
-  "devDependencies": {
-    "@rescripts/cli": "^0.0.12",
-    "@rescripts/rescript-env": "^0.0.10",
-    "concurrently": "^4.1.2",
-    "electron": "^6.0.7",
-    "electron-builder": "^21.2.0",
-    "http-server": "^0.11.1",
-    "typescript": "^3.6.2",
-    "wait-on": "^3.3.0"
-  },
-  "dependencies": {
-    "electron-is-dev": "^1.1.0",
-    "electron-log": "^3.0.7",
-    "electron-updater": "^4.1.2",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "^3.1.1"
-  },
   "build": {
     "appId": "com.github.desk-suite.paradise-client",
     "productName": "Paradise Client",
     "copyright": "Copyright © 2019 ${author}",
+    "win": {
+      "icon": "build/icon.ico"
+    },
     "files": [
       "build/**/*",
       "node_modules/**/*"
@@ -58,13 +34,43 @@
       "artifactName": "paradise-client-setup-${version}.${ext}"
     }
   },
+  "dependencies": {
+    "electron-is-dev": "^1.0.1",
+    "electron-log": "^3.0.7",
+    "electron-updater": "^4.1.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "^3.1.1",
+    "styled-components": "^4.3.2"
+  },
+  "homepage": "./",
+  "main": "public/electron.js",
+  "scripts": {
+    "start": "rescripts start",
+    "build": "rescripts build",
+    "test": "rescripts test",
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "build -w"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
-
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]}
+  ],
+  "devDependencies": {
+    "@rescripts/cli": "^0.0.10",
+    "@rescripts/rescript-env": "^0.0.5",
+    "concurrently": "^4.1.0",
+    "electron": "^4.0.6",
+    "electron-builder": "^20.38.5",
+    "typescript": "^3.3.3333",
+    "wait-on": "^3.2.0"
+  }
+}

@@ -1,74 +1,68 @@
-This repo contains the **bare minimum code** to have an auto-updating Electron app using [`electron-updater`](https://github.com/electron-userland/electron-builder/tree/master/packages/electron-updater) with releases stored on GitHub.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-If you can't use GitHub, you can use other providers:
+## Available Scripts
 
-- [Complete electron-updater HTTP example](https://gist.github.com/iffy/0ff845e8e3f59dbe7eaf2bf24443f104)
-- [Complete electron-updater from gitlab.com private repo example](https://gist.github.com/Slauta/5b2bcf9fa1f6f6a9443aa6b447bcae05)
+In the project directory, you can run:
 
-**NOTE:** If you want to run through this whole process, you will need to fork this repo on GitHub and replace all instances of `iffy` with your GitHub username before doing the following steps.
+### `npm start`
 
-1. For macOS, you will need a code-signing certificate.
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-    Install Xcode (from the App Store), then follow [these instructions](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW6) to make sure you have a "Mac Developer" certificate.  If you'd like to export the certificate (for automated building, for instance) [you can](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW7).  You would then follow [these instructions](https://www.electron.build/code-signing).
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-2. Adjust `package.json` if needed.
+### `npm test`
 
-    By default, `electron-updater` will try to detect the GitHub settings (such as the repo name and owner) from reading the `.git/config` or from reading other attributes within `package.json`.  If the auto-detected settings are not what you want, configure the [`publish`](https://github.com/electron-userland/electron-builder/wiki/Publishing-Artifacts#PublishConfiguration) property as follows:
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-        {
-            ...
-            "build": {
-                "publish": [{
-                    "provider": "github",
-                    "owner": "iffy",
-                    "repo": "electron-updater-example"
-                }],
-                ...
-            }
-        }
+### `npm run build`
 
-3. Install necessary dependencies with:
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-        yarn
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-   or
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-        npm install
+### `npm run eject`
 
-4. Generate a GitHub access token by going to <https://github.com/settings/tokens/new>.  The access token should have the `repo` scope/permission.  Once you have the token, assign it to an environment variable
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-    On macOS/linux:
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-        export GH_TOKEN="<YOUR_TOKEN_HERE>"
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-    On Windows, run in powershell:
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-        [Environment]::SetEnvironmentVariable("GH_TOKEN","<YOUR_TOKEN_HERE>","User")
+## Learn More
 
-    Make sure to restart IDE/Terminal to inherit latest env variable.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-5. Publish for your platform with:
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-        build -p always
+### Code Splitting
 
-   or
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-        npm run publish
+### Analyzing the Bundle Size
 
-   If you want to publish for more platforms, edit the `publish` script in `package.json`.  For instance, to build for Windows and macOS:
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-        ...
-        "scripts": {
-            "publish": "build --mac --win -p always"
-        },
-        ...
+### Making a Progressive Web App
 
-6. Release the release on GitHub by going to <https://github.com/YOUR_GIT_HUB_USERNAME/electron-updater-example/releases>, editing the release and clicking "Publish release."
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-7. Download and install the app from <https://github.com/YOUR_GIT_HUB_USERNAME/electron-updater-example/releases>.
+### Advanced Configuration
 
-8. Update the version in `package.json`, commit and push to GitHub.
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-9. Do steps 5 and 6 again.
+### Deployment
 
-10. Open the installed version of the app and see that it updates itself.
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -24,23 +24,17 @@
     -->
     <title>Paradise Client</title>
   </head>
-<body>
-  Current version: <span id="version">vX.Y.Z</span>
-  <div id="messages"></div>
-  <div id="root"></div>
-<script>
-// Display the current version
-let version = window.location.hash.substring(1);
-document.getElementById('version').innerText = version;
+  <body>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
 
-// Listen for messages
-const {ipcRenderer} = require('electron');
-ipcRenderer.on('message', function(event, text) {
-  var container = document.getElementById('messages');
-  var message = document.createElement('div');
-  message.innerHTML = text;
-  container.appendChild(message);
-})
-</script>
-</body>
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
 </html>
