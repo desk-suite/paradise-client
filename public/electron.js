@@ -53,11 +53,14 @@ if (process.platform === 'darwin') {
 // that updates are working.
 //-------------------------------------------------------------------
 let win;
+const path = require('path');
+const isDev = require('electron-is-dev');
 
 function sendStatusToWindow(text) {
   log.info(text);
   win.webContents.send('message', text);
 }
+
 function createDefaultWindow() {
   win = new BrowserWindow({
     webPreferences: {
@@ -68,9 +71,10 @@ function createDefaultWindow() {
   win.on('closed', () => {
     win = null;
   });
-  win.loadURL(`file://${__dirname}/index.html#v${app.getVersion()}`);
+  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   return win;
 }
+
 autoUpdater.on('checking-for-update', () => {
   sendStatusToWindow('Checking for update...');
 })
