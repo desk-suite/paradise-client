@@ -11,6 +11,18 @@ log.info('App starting...');
 
 let win;
 
+const installExtensions = async () => {
+  const installer = require('electron-devtools-installer')
+  const forceDownload = !!process.env.UPGRADE_EXTENSIONS
+  const extensions = [
+    'REACT_DEVELOPER_TOOLS',
+    'REDUX_DEVTOOLS'  ]
+
+  return Promise
+    .all(extensions.map(name => installer.default(installer[name], forceDownload)))
+    .catch(console.log)
+}
+
 function createDefaultWindow() {
   win = new BrowserWindow({
     webPreferences: {
@@ -20,7 +32,6 @@ function createDefaultWindow() {
   win.maximize();
   if (isDev) {
     // Open the DevTools.
-    //BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
     win.webContents.openDevTools();
   }
   win.on('closed', () => {
@@ -30,7 +41,10 @@ function createDefaultWindow() {
   return win;
 }
 
-app.on('ready', function()  {
+app.on('ready', async () => {
+  if(isDev && process.argv.indexOf('--noDevServer') === -1) {
+    await installExtensions()
+  }
   createDefaultWindow();
   autoUpdater.checkForUpdatesAndNotify();
 });
@@ -43,8 +57,8 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
+  if (win === null) {
+    createDefaultWindow();
   }
 });
 function sendStatusToWindow(text) {

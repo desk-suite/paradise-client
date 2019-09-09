@@ -38,9 +38,11 @@
     "electron-is-dev": "^1.0.1",
     "electron-log": "^3.0.7",
     "electron-updater": "^4.1.2",
+    "evergreen-ui": "^4.18.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "^3.1.1",
+    "rsuite": "^3.8.9",
     "styled-components": "^4.3.2"
   },
   "homepage": "./",
@@ -68,8 +70,12 @@
     "@rescripts/cli": "^0.0.10",
     "@rescripts/rescript-env": "^0.0.5",
     "concurrently": "^4.1.0",
+    "dart-sass": "^1.22.10",
     "electron": "^4.0.6",
     "electron-builder": "^20.38.5",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-react-devtools": "^0.5.3",
+    "sass-loader": "^8.0.0",
     "typescript": "^3.3.3333",
     "wait-on": "^3.2.0"
   }
