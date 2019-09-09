@@ -7,7 +7,7 @@ import './App.css';
 
 export const App = () => {
   // const electron = window.require('electron')
-  const [message, setMessage] = React.useState();
+  const [message, setMessage] = React.useState(' ');
   const [showMessage, setShowMessage] = React.useState(false);
   const [activeMenu, setActiveMenu] = React.useState("dashboard");
   const handleSelect = (activeKey) => {
