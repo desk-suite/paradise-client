@@ -1,61 +1,56 @@
 import React from 'react';
+import { HashRouter, Redirect, Route } from 'react-router-dom';
 import { ipcRenderer } from 'electron';
-import { CornerDialog } from 'evergreen-ui'
-import { Portal } from './components/Portal'
-import { AppBar } from './components/AppBar'
+import { Layout } from 'antd';
+import { CornerDialog } from 'evergreen-ui';
+import { AppMenu } from './components/App/Menu';
+import { Dashboard } from './views/Dashboard';
+import { Hotel } from './views/Hotel';
 import './App.css';
 
 export const App = () => {
   // const electron = window.require('electron')
   const [message, setMessage] = React.useState(' ');
   const [showMessage, setShowMessage] = React.useState(false);
-  const [activeMenu, setActiveMenu] = React.useState("dashboard");
-  const handleSelect = (activeKey) => {
-    setActiveMenu(activeKey);
-  }
-  ipcRenderer.on('message', function(event, text) {
-    setShowMessage(true)
+  ipcRenderer.on('message', (event, text) => {
+    setShowMessage(true);
     setMessage(text);
-  })
+  });
+
+  // const STMenu = styled(Menu)`
+  // height: 100%;
+  // max-width: 200px;
+  // `
+  // const Layout = styled(layout)`
+  //   position: absolute;
+  //   height: 100%;
+  //   background-color: #f5f5f5;
+  // `
+  // const Content = styled(layout.Content)`
+  // width: 100%;
+  // `
 
   return (
-    <div>
-      <Portal>
-        <AppBar >
-          
-        </AppBar>
-      </Portal>
-      <CornerDialog
-        title="Paradise Client"
-        isShown={showMessage}
+    <HashRouter>
+      <Layout
+        style={{
+          height: '-webkit-fill-available'
+        }}
       >
-        {message}
-      </CornerDialog>
-    </div>
-
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Cliente no oficial de Paradise.
-    //     </p>
-    //     <p>
-    //       Versión: {appVersion}
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //     <p>
-    //       { message }
-    //     </p>
-    //   </header>
-    // </div>
+        <AppMenu />
+        <Layout>
+          <Layout.Content>
+            {/* <Switch> */}
+            <Redirect from="/" to="dashboard/" />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/hotel" component={Hotel} />
+            {/* </Switch> */}
+          </Layout.Content>
+        </Layout>
+        <CornerDialog title="Paradise Client" isShown={showMessage}>
+          {message}
+        </CornerDialog>
+      </Layout>
+    </HashRouter>
   );
-}
-
-// export default App;
+};

@@ -5,9 +5,9 @@ import { App } from './App';
 import * as serviceWorker from './serviceWorker';
 
 // Estilos
-
-/// Fuentes
-import './assets/fonts/stylesheet.css'
+import 'antd/dist/antd.css';
+// Fuentes
+import './assets/fonts/stylesheet.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
