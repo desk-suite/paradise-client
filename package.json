@@ -1,7 +1,7 @@
 {
   "name": "paradise-client",
   "description": "Cliente no oficial de la solucion Paradise de Urusys",
-  "version": "v0.0.20-beta.2150",
+  "version": "0.0.0",
   "private": true,
   "author": {
     "name": "Diego Rodriguez",
@@ -59,7 +59,8 @@
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
-    "electron-pack": "build -w"
+    "electron-pack": "build -w",
+    "release": "release-it"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -90,6 +91,7 @@
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
+    "release-it": "^12.3.6",
     "sass-loader": "^8.0.0",
     "typescript": "^3.3.3333",
     "wait-on": "^3.2.0"
