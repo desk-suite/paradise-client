@@ -16,17 +16,17 @@ export const AppMenu = withRouter(props => {
         onSelect={handleSelect}
       >
         <Menu.ItemGroup>
-          <Menu.Item key="dashboard">
+          <Menu.Item key="dashboard" disabled={props.disabled}>
             <Icon component={MdDashboard} />
             <span>Dashboard</span>
           </Menu.Item>
         </Menu.ItemGroup>
         <Menu.ItemGroup>
-          <Menu.Item key="hotel">
+          <Menu.Item key="hotel" disabled={props.disabled}>
             <Icon component={MdRoomService} />
             <span>Hotel</span>
           </Menu.Item>
-          <Menu.Item key="pos">
+          <Menu.Item key="pos" disabled={props.disabled}>
             <Icon component={MdShoppingCart} />
             <span>Punto de ventas</span>
           </Menu.Item>
