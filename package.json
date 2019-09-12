@@ -103,7 +103,7 @@
     "hooks": {
       "after:release": [
         "echo Successfully released ${name} v${version} to ${repo.repository}.",
-        "rimraf public",
+        "rimraf dist",
         "yarn electron-pack"
       ]
     }
