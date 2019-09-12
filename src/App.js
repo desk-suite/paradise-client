@@ -1,57 +1,63 @@
 import React from 'react';
 import { HashRouter, Redirect, Route } from 'react-router-dom';
-import styled from 'styled-components';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import { Layout, notification } from 'antd';
 import { AppMenu } from './components/App/Menu';
+import { Header } from './components/App/Header'
 import { Dashboard } from './views/Dashboard';
 import { Hotel } from './views/Hotel';
 import './App.css';
 
-export const App = () => {
-  const Title = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    height: 62px;
-    width: fit-content;
-    line-height: initial;
-  `;
-  const AppName = styled.span`
-    font-family: 'Comfortaa';
-    font-weight: 600;
-    font-size: 16px;
-  `;
-  const AppVersion = styled.span`
-    font-family: 'Comfortaa';
-    font-weight: 200;
-    font-size: 8px;
-  `;
-  const [appVersion] = React.useState(remote.app.getVersion());
-  ipcRenderer.on('message', (event, text) => {
+const handleUpdate = () => {
+  // ipcRenderer.on('checking-for-update', (event, text) => {
+  //   notification.info({
+  //     message: 'Paradise Client',
+  //   });
+  // });
+  ipcRenderer.on('electron-update', (event, data) => {
+    switch(data.type) {
+      case 'checking-for-update': {
+        notification.info({
+          message: 'Estamos buscando actualizaciones...',
+        });
+        break;
+      }
+      case 'update-not-available': {
+        const {version} = data.data;
+        notification.success({
+          message: 'Actualmente cuentas con la versión más reciente!',
+          description: `versión instalada: ${version}`
+        });
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  })
+  ipcRenderer.on('checking-for-update', () => {
     notification.info({
-      message: 'Paradise Client',
-      description: text,
-      placement: 'bottomRight'
+      message: 'Estamos buscando actualizaciones...',
+    });
+  });
+  ipcRenderer.on('update-not-available', (event, data) => {
+    const {version} = data;
+    notification.success({
+      message: 'Actualmente cuentas con la versión más reciente!',
+      description: `versión instalada: ${version}`
     });
   });
 
+}
+
+export const App = () => {
+  handleUpdate();
   return (
     <HashRouter>
-      <Layout
-        style={{
-          height: '-webkit-fill-available'
-        }}
-      >
+      <Layout style={{ height: '-webkit-fill-available' }}>
         <AppMenu />
         <Layout>
-          <Layout.Header style={{ background: '#f0f2f5' }}>
-            <Title>
-              <AppName>Paradise Client</AppName>
-              <AppVersion>Versión: {appVersion}</AppVersion>
-            </Title>
-          </Layout.Header>
+          <Header />
           <Layout.Content>
             <Redirect from="/" to="dashboard/" />
             <Route path="/dashboard" component={Dashboard} />

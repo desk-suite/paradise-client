@@ -1,7 +1,7 @@
 {
   "name": "paradise-client",
   "description": "Cliente no oficial de la solucion Paradise de Urusys",
-  "version": "0.0.20-beta.1300",
+  "version": "v0.0.20-beta.2150",
   "private": true,
   "author": {
     "name": "Diego Rodriguez",
