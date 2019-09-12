@@ -3,27 +3,22 @@ import { HashRouter, Redirect, Route } from 'react-router-dom';
 import { ipcRenderer } from 'electron';
 import { Layout, notification } from 'antd';
 import { AppMenu } from './components/App/Menu';
-import { Header } from './components/App/Header'
+import { Header } from './components/App/Header';
 import { Dashboard } from './views/Dashboard';
 import { Hotel } from './views/Hotel';
 import './App.css';
 
-const handleUpdate = () => {
-  // ipcRenderer.on('checking-for-update', (event, text) => {
-  //   notification.info({
-  //     message: 'Paradise Client',
-  //   });
-  // });
+export const App = () => {
   ipcRenderer.on('electron-update', (event, data) => {
-    switch(data.type) {
+    switch (data.type) {
       case 'checking-for-update': {
         notification.info({
-          message: 'Estamos buscando actualizaciones...',
+          message: 'Estamos buscando actualizaciones...'
         });
         break;
       }
       case 'update-not-available': {
-        const {version} = data.data;
+        const { version } = data.data;
         notification.success({
           message: 'Actualmente cuentas con la versión más reciente!',
           description: `versión instalada: ${version}`
@@ -34,24 +29,20 @@ const handleUpdate = () => {
         break;
       }
     }
-  })
+  });
   ipcRenderer.on('checking-for-update', () => {
     notification.info({
-      message: 'Estamos buscando actualizaciones...',
+      message: 'Estamos buscando actualizaciones...'
     });
   });
   ipcRenderer.on('update-not-available', (event, data) => {
-    const {version} = data;
+    const { version } = data;
     notification.success({
       message: 'Actualmente cuentas con la versión más reciente!',
       description: `versión instalada: ${version}`
     });
   });
 
-}
-
-export const App = () => {
-  handleUpdate();
   return (
     <HashRouter>
       <Layout style={{ height: '-webkit-fill-available' }}>
