@@ -95,5 +95,17 @@
     "sass-loader": "^8.0.0",
     "typescript": "^3.3.3333",
     "wait-on": "^3.2.0"
+  },
+  "release-it": {
+    "github": {
+      "tagName": "v${version}"
+    },
+    "hooks": {
+      "after:release": [
+        "echo Successfully released ${name} v${version} to ${repo.repository}.",
+        "rimraf public",
+        "yarn electron-pack"
+      ]
+    }
   }
 }
